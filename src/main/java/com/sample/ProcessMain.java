@@ -1,5 +1,8 @@
 package com.sample;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -23,7 +26,12 @@ public class ProcessMain {
 		RuntimeManager manager = createRuntimeManager(kbase);
 		RuntimeEngine engine = manager.getRuntimeEngine(null);
 		KieSession ksession = engine.getKieSession();
-		ksession.startProcess("com.sample.bpmn.hello");
+		//ksession.startProcess("com.sample.bpmn.hello");
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", "jBPM");
+		
+		ksession.startProcess("com.sample.bpmn.hello", params);
 
 		manager.disposeRuntimeEngine(engine);
 		System.exit(0);
